@@ -29,14 +29,35 @@
  */
 
 function rot13(string) {
-  // This is your job. :)
+  let finalString = ''
+  
+  for (character of string) {  
+    let newAscii = character.charCodeAt(string)
+    let newCharCode = character.charCodeAt(string)
+    
+    if (newAscii >= 65 && newAscii < 78 || newAscii >= 97 && newAscii < 110) {
+      newCharCode = Number(newAscii) + 13
+      finalString = finalString + String.fromCharCode(newCharCode)
+    }
+
+    if (newAscii >= 78 && newAscii < 90 || newAscii >= 110 && newAscii <= 122) {
+      newCharCode = Number(character.charCodeAt(string)) - 13
+      finalString = finalString + String.fromCharCode(newCharCode)
+    }
+    //don't need an else statement because it was copying the character into the string too
+    //but we need to account for spaces
+    if (newAscii === 32) {
+      finalString = finalString + ' '
+    }
+  }
+  console.log(finalString)
+  return finalString
 }
 
 if (require.main === module) {
   console.log('Running sanity checks for rot13:');
-
-  // Add your own sanity checks here.
-  // How else will you be sure your code does what you think it does?
+console.log(rot13('hey'))
+console.log(rot13('hello world'))
 }
 
 module.exports = rot13;
